@@ -1,6 +1,6 @@
 import { createStitches } from "@stitches/react"
 
-export const { styled, getCssText } = createStitches({
+export const { styled, getCssText, keyframes } = createStitches({
   theme: {
     fonts: {
       main: "Montserrat, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, sans-serif",
