@@ -1,10 +1,11 @@
 import Image from 'next/image'
-import type { Engine, Container } from 'tsparticles-engine'
-import { Button } from '@atoms'
-import Main from './styles'
-import logo from '@images/logo.jpeg'
 import { useCallback } from 'react'
-import Particles from 'react-tsparticles'
+import type { Engine, Container } from 'tsparticles-engine'
+import { tsParticles } from 'tsparticles-engine'
+import { loadPolygonPath } from 'tsparticles-path-polygon'
+import { Button } from '@atoms'
+import Main, { BParticles } from './styles'
+import logo from '@images/logo.jpeg'
 import { loadFull } from 'tsparticles'
 
 export default () => {
@@ -16,50 +17,61 @@ export default () => {
   }, [])
 
   const particlesLoaded = useCallback(async (container?: Container) => {
-    await console.log(container)
+    await loadPolygonPath(tsParticles)
   }, [])
 
   const options = {
     fpsLimit: 120,
-    background: {
-      color: '#0b032d',
-    },
-    backgroundMode: {
-      enable: true,
-    },
     particles: {
+      number: {
+        value: 120,
+      },
       color: {
-        value: ['#f67e7d', '#843b62', '#621940'],
+        value: '#93cbf5',
+        animation: {
+          enable: true,
+          speed: 10,
+        },
       },
       links: {
-        color: '#ffb997',
+        color: '#45cbf7',
         enable: true,
+        distance: 150,
+        opacity: 0.5,
+        width: 2,
       },
       move: {
         enable: true,
         speed: 1,
       },
       size: {
-        value: 5,
-        random: {
-          enable: true,
-          minimumValue: 1,
-        },
-        animation: {
-          enable: true,
-          speed: 1,
-          minimumValue: 1,
-        },
+        value: 3,
+        random: true,
       },
       opacity: {
         value: 0.8,
         random: {
           enable: true,
-          minimumValue: 0.4,
+          minimumValue: 10,
         },
       },
     },
     smooth: true,
+    retinaDetect: true,
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: 'grab',
+        },
+      },
+      modes: {
+        grab: {
+          distance: 100,
+        },
+      },
+      detectOn: 'window',
+    },
   }
 
   return (
@@ -67,7 +79,7 @@ export default () => {
       <h1>Font Test</h1>
       <Image src={logo} alt="A logo" width={72} height={72} />
       <Button />
-      <Particles
+      <BParticles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
